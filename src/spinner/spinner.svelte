@@ -1,5 +1,5 @@
-<!-- <script>
-	import { loading } from '../routes/+page.svelte';
+<script>
+	import { loading } from '../stores/store.js';
 </script>
 
 {#if $loading}
@@ -38,4 +38,4 @@
 			transform: rotate(1turn);
 		}
 	}
-</style> -->
+</style>
