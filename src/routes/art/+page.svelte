@@ -2,6 +2,15 @@
 	import Spinner from '../../spinner/spinner.svelte';
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { loading } from '../../stores/store';
+	import { goto } from '$app/navigation';
+
+	export function clickGeneration() {
+		goto('/art');
+	}
+
+	export function clickVariation() {
+		goto('/art/variation');
+	}
 
 	let answer = '';
 
@@ -68,4 +77,6 @@
 	<!-- <div class="answer-area font-black">{answer}</div> -->
 	<!-- svelte-ignore a11y-img-redundant-alt -->
 	<img src={answer} alt="a picture" />
+	<button on:click={clickGeneration}>Art Generation</button>
+	<button on:click={clickVariation}>Art Variation</button>
 </div>
