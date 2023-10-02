@@ -12,6 +12,10 @@
 		goto('/art/variation');
 	}
 
+	export function clickEdit() {
+		goto('/art/edit');
+	}
+
 	let answer = '';
 
 	async function handleSubmit(e) {
@@ -77,6 +81,7 @@
 	<!-- <div class="answer-area font-black">{answer}</div> -->
 	<!-- svelte-ignore a11y-img-redundant-alt -->
 	<img src={answer} alt="a picture" />
-	<button on:click={clickGeneration}>Art Generation</button>
-	<button on:click={clickVariation}>Art Variation</button>
+	<button on:click={clickGeneration}>Image Generation</button>
+	<button on:click={clickVariation}>Image Variation</button>
+	<button on:click={clickEdit}>Image Edit</button>
 </div>

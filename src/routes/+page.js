@@ -1,21 +1,15 @@
-// links to use
+// links to use for image variation
 // 1. https://github.com/LearnWebCode/gpt-nextjs-example/blob/main/pages/api/get-painting.js
 // 2. https://www.npmjs.com/package/openai
 // 3. https://platform.openai.com/docs/guides/images/usage
 // 4. https://platform.openai.com/docs/api-reference/images/object
 // 5. https://www.youtube.com/watch?v=RA0C_Hh9g8Q&ab_channel=LearnWebCode
 
-// implement image variation
-// have a button generation and variation - DONE
-// in new page, everything same except wordings - DONE
-//  do AWS upload images - DONE
+// links for image edit
+// 1. https://medium.com/@david.richards.tech/how-to-create-openai-dall-e-mask-images-ed8feb562eba
+// 2. https://ai-image-editor.netlify.app/
 
-// do our FE and BE api calls - make sure to be updating the image table and shit when an image is created
-// make sure everything works fine
-
-// then move on to build gencraft clone
-
-// lets follow along then go back to the top
-
-// first we need to allow for upload image in the frontend (follow her code), and then allow for making a new file in the backend
-// then we do simple frontend variation request, and in the backend, our file name = filePath
+// STEPS
+// 1. they need to upload original image and for it to be in a file
+// 2. they need to upload mask image and for it to be in a file
+// 3. then we need to do openAI calls and shit la
