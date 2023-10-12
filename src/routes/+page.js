@@ -9,7 +9,10 @@
 // 1. https://medium.com/@david.richards.tech/how-to-create-openai-dall-e-mask-images-ed8feb562eba
 // 2. https://ai-image-editor.netlify.app/
 
-// STEPS
-// 1. they need to upload original image and for it to be in a file
-// 2. they need to upload mask image and for it to be in a file
-// 3. then we need to do openAI calls and shit la
+// GATHER EVERYTHING TOGETHER
+// THINGS TO DO
+// 1. sendgrid email sending for users who are signed up
+// 2. better styling for navbar
+
+// NEXT
+// lets do surprise me for this page
