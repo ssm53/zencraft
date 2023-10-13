@@ -10,6 +10,10 @@
 	let answer = '';
 	let selectedSize = '';
 	let inputDetails = '';
+	const userId = getUserId();
+	// // testing
+	// let totalPrompts;
+	// // end testing
 
 	const promptOptions = [
 		'Pixel art dragon, adorable, big eyes, magical and dreamy, blender render, 8k, fantasy colors, soft texture',
@@ -49,7 +53,6 @@
 		e.preventDefault();
 		inputDetails = e.target['input'].value;
 		loading.set(true);
-		const userId = getUserId();
 
 		try {
 			const resp = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + '/get-art', {
@@ -67,6 +70,15 @@
 				console.log(res);
 				answer = res.text[0].url;
 				generateFormSubmitted.set(true);
+				// here we do api call to increment no of prompts of this user by 1
+				const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+					method: 'POST',
+					mode: 'cors',
+					headers: {
+						'Content-Type': 'application/json'
+						// Authorization: getAccessTokenFromLocalStorage()
+					}
+				});
 			} else {
 				loading.set('false');
 				// Handle other status codes here
@@ -81,6 +93,33 @@
 			console.log('aiyo');
 		}
 	}
+
+	// // testing
+	// async function getNoOfPrompts() {
+	// 	const userId = getUserId();
+
+	// 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/no-of-prompts/${userId}`, {
+	// 		method: 'GET'
+	// 	});
+
+	// 	const res = await resp.json();
+	// 	console.log(res);
+	// 	console.log(typeof res);
+
+	// 	if (resp.status === 200) {
+	// 		totalPrompts = res.promptNumber;
+	// 		console.log(totalPrompts);
+	// 		console.log(typeof totalPrompts);
+
+	// 		// console.log(res);
+	// 		// return {
+	// 		// 	noOfPrompts: res.promptNumber
+	// 		// };
+	// 	} else {
+	// 		console.log('cannot get no of prompts');
+	// 	}
+	// }
+	// //end testing
 </script>
 
 <Spinner />
@@ -115,6 +154,7 @@
 					</button>
 				</div>
 			</form>
+			<!-- <button on:click={getNoOfPrompts}>click me</button> -->
 		</div>
 
 		<div class="size-box flex flex-col w-5/6 bg-white mt-10">
@@ -128,18 +168,23 @@
 					on:click={() => updateSelectedSize('512x512')}
 					class="size-button bg-pink-700 w-1/2 px-3 py-3 rounded-md text-white mb-5">512x512</button
 				>
-				<button
-					on:click={() => updateSelectedSize('1024x1024')}
-					class="size-button bg-pink-700 w-1/2 px-3 py-3 rounded-md text-white mb-5"
-					>1024x1024</button
-				>
 			</div>
 		</div>
 	</div>
-	<div class="r-container w-3/5 flex justify-center items-center">
+	<div class="r-container w-3/5 flex flex-col justify-center items-center">
 		{#if $generateFormSubmitted}
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img src={answer} alt="a picture" />
+			<div class="download-button flex justify-end mt-7">
+				<a
+					href={answer}
+					download="your_image_filename.jpg"
+					class="font-bold text-pink-700 border-2 px-3 py-3 border-pink-700 bg-gray-100 hover hover:bg-pink-700 hover:text-gray-100"
+					target="_blank"
+				>
+					Download
+				</a>
+			</div>
 		{:else}
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img src="/src/images/grid-image.jpeg" alt="grid picture" />

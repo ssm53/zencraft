@@ -8,6 +8,7 @@
 	import { getUserId } from '../../utils/auth';
 
 	let answer = '';
+	const userId = getUserId();
 	// upload ori image
 	export async function uploadOriImage(evt) {
 		const formData = new FormData();
@@ -43,7 +44,6 @@
 	// making call to our backend openai api to generate edits
 	export async function clickGenerateEdit(evt) {
 		evt.preventDefault();
-		const userId = getUserId();
 
 		const inputDetails = evt.target['input'].value;
 		loading.set(true);
@@ -64,6 +64,15 @@
 			editFormSubmitted.set(true);
 			loading.set(false);
 			answer = res.text[0].url;
+			// here we do api call to increment no of prompts of this user by 1
+			const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+				method: 'POST',
+				mode: 'cors',
+				headers: {
+					'Content-Type': 'application/json'
+					// Authorization: getAccessTokenFromLocalStorage()
+				}
+			});
 		} else {
 			loading.set(false);
 			if (res.error) {
@@ -115,10 +124,20 @@
 			</form>
 		</div>
 	</div>
-	<div class="r-container w-3/5 flex justify-center items-center">
+	<div class="r-container w-3/5 flex flex-col justify-center items-center">
 		{#if $editFormSubmitted}
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img src={answer} alt="a picture" />
+			<div class="download-button flex justify-end mt-7">
+				<a
+					href={answer}
+					download="your_image_filename.jpg"
+					class="font-bold text-pink-700 border-2 px-3 py-3 border-pink-700 bg-gray-100 hover hover:bg-pink-700 hover:text-gray-100"
+					target="_blank"
+				>
+					Download
+				</a>
+			</div>
 		{:else}
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img src="/src/images/grid-image.jpeg" alt="grid picture" />

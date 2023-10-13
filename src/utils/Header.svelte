@@ -2,6 +2,31 @@
 	import { loggedIn } from '../stores/store';
 	import { logOut } from './auth';
 	import { goto } from '$app/navigation';
+	import { getUserId } from './auth';
+	// import { _totalPrompts } from '../routes/+layout.js'; // TESTING
+	import { onMount } from 'svelte';
+	import { totalPrompts } from '../stores/store'; // NEW
+
+	// let numberOfPromptsRemaining = 5; // TESTING
+
+	// TESTING
+	// async function updatePromptsRemaining() {
+	// 	// Ensure _totalPrompts is available
+	// 	if (_totalPrompts !== undefined) {
+	// 		numberOfPromptsRemaining = Number(5 - _totalPrompts);
+	// 	}
+	// }
+
+	// NEW
+	let numberOfPromptsRemaining;
+	$: {
+		numberOfPromptsRemaining = 5 - $totalPrompts;
+	}
+
+	totalPrompts.subscribe((value) => {
+		$totalPrompts = value;
+	});
+	// NEW ENDS
 
 	let logIO;
 	loggedIn.subscribe((value) => {
@@ -24,8 +49,8 @@
 		goto('/variation');
 	}
 
-	function clickMyImages() {
-		goto('/my-images');
+	function clickMyLibrary() {
+		goto('/my-library');
 	}
 
 	async function clickLogin() {
@@ -35,6 +60,13 @@
 	function clickSignUp() {
 		goto('/sign-up');
 	}
+
+	// TESTING
+	// // Call updatePromptsRemaining when _totalPrompts is updated
+	// $: updatePromptsRemaining();
+
+	// // This will update prompts remaining when the component is initially loaded
+	// onMount(updatePromptsRemaining);
 </script>
 
 <main>
@@ -69,12 +101,12 @@
 					</button>
 					<button
 						class="text-white hover:text-indigo-600 focus:outline-none"
-						on:click={clickMyImages}
+						on:click={clickMyLibrary}
 					>
-						My Images
+						My Library
 					</button>
 
-					<span> 50 prompts remaining</span>
+					<span>{numberOfPromptsRemaining} prompts remaining</span>
 					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={logOut}>
 						Log Out
 					</button>

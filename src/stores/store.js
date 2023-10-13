@@ -16,3 +16,4 @@ export const varImages = writable(false);
 
 export const editImages = writable(false);
 
+export const totalPrompts = writable(0);

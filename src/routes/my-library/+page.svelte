@@ -84,6 +84,16 @@
 						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img src={genI.url} alt="my picture" class="w-full h-64 object-cover" />
 						<p class="text-gray-700 mt-4 text-sm">{genI.prompt}</p>
+						<div class="download-button flex justify-end mt-7">
+							<a
+								href={genI.url}
+								download="your_image_filename.jpg"
+								class="font-bold text-pink-700 border-2 px-3 py-3 border-pink-700 bg-gray-100 hover hover:bg-pink-700 hover:text-gray-100"
+								target="_blank"
+							>
+								Download
+							</a>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -93,6 +103,16 @@
 					<div class="bg-white shadow-lg p-4 rounded-lg">
 						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img src={varI.url} alt="my picture" class="w-full h-64 object-cover" />
+						<div class="download-button flex justify-end mt-7">
+							<a
+								href={varI.url}
+								download="your_image_filename.jpg"
+								class="font-bold text-pink-700 border-2 px-3 py-3 border-pink-700 bg-gray-100 hover hover:bg-pink-700 hover:text-gray-100"
+								target="_blank"
+							>
+								Download
+							</a>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -103,6 +123,16 @@
 						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img src={editI.url} alt="my picture" class="w-full h-64 object-cover" />
 						<p class="text-gray-700 mt-4 text-sm">{editI.prompt}</p>
+						<div class="download-button flex justify-end mt-7">
+							<a
+								href={editI.url}
+								download="your_image_filename.jpg"
+								class="font-bold text-pink-700 border-2 px-3 py-3 border-pink-700 bg-gray-100 hover hover:bg-pink-700 hover:text-gray-100"
+								target="_blank"
+							>
+								Download
+							</a>
+						</div>
 					</div>
 				{/each}
 			</div>
