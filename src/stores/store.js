@@ -10,3 +10,9 @@ export const variationFormSubmitted = writable(false);
 
 export const editFormSubmitted = writable(false);
 
+export const genImages = writable(true);
+
+export const varImages = writable(false);
+
+export const editImages = writable(false);
+

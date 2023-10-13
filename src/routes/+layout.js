@@ -37,11 +37,10 @@ export async function load() {
 // BACKEND ENDPOINTS (basic done)
 // need to check for edit images process, cause for now, we can only fo the images w 1024 1024 size.. i mean maybe not cause of sixe, but when i tried to do w new mask images, it didnt work
 
-// MY IMAGES PAGE
-// need to start creating this page
-
-// SEARCH PAGE
-// need to start creating this page
+// MY LIBRARY PAGE
+// need to ensure how to display edit image part
 
 // further things
 // need to allow doanloads everywhere
+// make sure to do rediret and shit
+// alerts
