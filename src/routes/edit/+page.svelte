@@ -1,0 +1,127 @@
+<script>
+	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+	import { goto } from '$app/navigation';
+	import { loading } from '../../stores/store';
+	import Spinner from '../../spinner/spinner.svelte';
+	import { editFormSubmitted } from '../../stores/store';
+	import { getAccessTokenFromLocalStorage } from '../../utils/auth';
+	import { getUserId } from '../../utils/auth';
+
+	let answer = '';
+	// upload ori image
+	export async function uploadOriImage(evt) {
+		const formData = new FormData();
+		formData.append('file', evt.target.files[0]);
+		console.log(evt.target.files[0]);
+		evt.target.value = null;
+
+		try {
+			const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-original', {
+				method: 'POST',
+				body: formData
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	// upload mask image
+	export async function uploadMaskImage(evt) {
+		const formData = new FormData();
+		formData.append('file', evt.target.files[0]);
+		console.log(evt.target.files[0]);
+		evt.target.value = null;
+
+		try {
+			const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-mask', {
+				method: 'POST',
+				body: formData
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	// making call to our backend openai api to generate edits
+	export async function clickGenerateEdit(evt) {
+		evt.preventDefault();
+		const userId = getUserId();
+
+		const inputDetails = evt.target['input'].value;
+		loading.set(true);
+
+		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/generate-edit', {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: getAccessTokenFromLocalStorage()
+			},
+			body: JSON.stringify({ prompt: inputDetails, userId: userId })
+		});
+		const res = await resp.json();
+		console.log(res);
+
+		if (resp.status == 200) {
+			editFormSubmitted.set(true);
+			loading.set(false);
+			answer = res.text[0].url;
+		} else {
+			loading.set(false);
+			if (res.error) {
+				console.log('aiyo');
+			}
+		}
+	}
+</script>
+
+<Spinner />
+
+<div class="container min-w-full max-w-screen-xl w-full flex flex-row">
+	<div class="l-container w-2/5 bg-gray-100 h-screen flex flex-col items-center">
+		<div class="size-box flex flex-col w-5/6 bg-white mt-10">
+			<div class=" ml-5">
+				<label class="text-pink-700 font-bold" for="file">Upload Original Image</label>
+				<input on:change={uploadOriImage} id="file" accept="image/*" type="file" />
+			</div>
+			<span class="font-bold text-black ml-5">We only accept 512x512 sized images!</span>
+			<div class=" ml-5">
+				<label class="text-pink-700 font-bold" for="file">Upload Mask Image</label>
+				<input on:change={uploadMaskImage} id="file" accept="image/*" type="file" />
+			</div>
+		</div>
+		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6">
+			<div>
+				<span class="mr-12 ml-5 mt-4 font-bold text-pink-700">Describe your edit in detail</span>
+			</div>
+			<form on:submit={clickGenerateEdit} class="bg-white shadow-md rounded-lg p-8">
+				<div class="mb-6">
+					<label for="input" class="block text-gray-700 text-sm font-bold mb-2">
+						Give a detailed description
+					</label>
+					<input
+						type="text"
+						name="input"
+						placeholder="Give your prompt"
+						class="block w-full rounded-md py-2 px-3 border border-gray-300 h-32 text-sm shadow-sm shadow-gray-500"
+					/>
+				</div>
+				<div class="flex justify-center mt-8">
+					<button
+						class="bg-green-500 hover:bg-green-600 w-60 text-white font-bold py-2 px-4 rounded-md"
+						type="submit"
+					>
+						Generate Edit
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="r-container w-3/5 flex justify-center items-center">
+		{#if $editFormSubmitted}
+			<!-- svelte-ignore a11y-img-redundant-alt -->
+			<img src={answer} alt="a picture" />
+		{:else}
+			<!-- svelte-ignore a11y-img-redundant-alt -->
+			<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+		{/if}
+	</div>
+</div>

@@ -12,7 +12,9 @@
 // GATHER EVERYTHING TOGETHER
 // THINGS TO DO
 // 1. sendgrid email sending for users who are signed up
-// 2. better styling for navbar
+// 2. better styling for navbar, hover buttons etc
+// 3. should do default size (if user doesnt choose size, it will be 512 x 512)
+// 4. in the grid lines, make sure to say youre images wll appear here (like gencraft)
 
-// NEXT
-// lets do surprise me for this page
+// NEXT UP
+

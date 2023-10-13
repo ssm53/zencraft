@@ -14,7 +14,7 @@ export function logOut() {
 	loggedIn.update((value) => {
 		return false;
 	});
-	goto('/users/new');
+	goto('/sign-in');
 
 	//SHAUNS CODE
 
@@ -71,4 +71,20 @@ export function getAccessTokenFromLocalStorage() {
 		return JSON.parse(auth)['token'];
 	}
 	return null;
+}
+
+export function getUserId() {
+	const auth = localStorage.getItem('auth');
+	if (auth) {
+		return JSON.parse(auth)['user'];
+	}
+	return null;
+}
+
+export async function isLoggedIn() {
+	if (!getAccessTokenFromLocalStorage()) {
+		loggedIn.set(false);
+	} else {
+		loggedIn.set(true);
+	}
 }
