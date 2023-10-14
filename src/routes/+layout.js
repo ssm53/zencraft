@@ -5,7 +5,7 @@ import { getUserId } from '../utils/auth';
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 import { totalPrompts } from '../stores/store'; // NEW
 
-let hasCheckedLoggedIn = false; // Add this flag
+let hasCheckedLoggedIn = false;
 // export let _totalPrompts; // TESTING
 
 export async function load() {
@@ -16,6 +16,7 @@ export async function load() {
 		hasCheckedLoggedIn = true; // Set the flag to true to prevent further calls
 	}
 
+	// NEW
 	const userId = getUserId();
 
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/no-of-prompts/${userId}`, {
@@ -83,9 +84,8 @@ export async function load() {
 // DOWNLOADS (basic done)
 // need to do for edit images mylibarry part
 
-// CALCULATE PROMPTS
-// need to add no of prompts in user table..
-// find a way to calculate prompts
+// CALCULATE PROMPTS (basic done)
+// issue is it autmatically updates only when you load it... not instantly, without loading
 
 // PAYMENT
 // once prompts are expired, you cannot make anymore api requests.
@@ -100,3 +100,4 @@ export async function load() {
 // make sure to do rediret and shit
 // alerts
 // need to ensure default option is 256x156 or size buttons and also its colour in image generation
+// error handling

@@ -5,7 +5,7 @@
 	import { getUserId } from './auth';
 	// import { _totalPrompts } from '../routes/+layout.js'; // TESTING
 	import { onMount } from 'svelte';
-	import { totalPrompts } from '../stores/store'; // NEW
+	import { totalPrompts } from '../stores/store'; // NEW and NEW 2
 
 	// let numberOfPromptsRemaining = 5; // TESTING
 

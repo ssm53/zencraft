@@ -17,12 +17,13 @@
 // 4. in the grid lines, make sure to say youre images wll appear here (like gencraft)
 
 // NEXT UP
-// CALCULATE PROMPTS
-// need to add no of prompts in user table..
+// PAYMENT
+// once prompts are expired, you cannot make anymore api requests.
+// if you try to do it, it will redirect you to payment page w an alert
+// for you to pay RM100 for a 100 prompts. once that 100 prompts, finishes, you then need to pay again
 
-//STEPS
-// add no of prompts field to user table - DONE
-// each time a prompt is successful, we do an api call to backend... in the backend, we add the noofprompts field of that user by 1 - DONE
-// so in our header.svelte, we do an api request to get the no of prompts done by each user - DONE
-// we then subtract that number from 5 to display the no of prompts remaining in our header.
-// issue here is that when new user logs in, it doesnt automatically change the prompts remaining.. that means we need to do this in the authenticate user function... maybe we gotta do that noofprompts api request in our authenticate user function
+// STEPS
+// for gen/var and edit, in the same function, we should do an api call to get noofprompts.
+// if noofprompts >= 1, then we can do api call, else goto (payment page)
+
+// lets try it for generate

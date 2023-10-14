@@ -54,6 +54,8 @@
 		inputDetails = e.target['input'].value;
 		loading.set(true);
 
+		
+
 		try {
 			const resp = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + '/get-art', {
 				method: 'POST',
