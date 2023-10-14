@@ -51,48 +51,61 @@
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		inputDetails = e.target['input'].value;
 		loading.set(true);
 
-		
+		// here we're doing api call to get no of prompts remaining, to see if user can do api call or not. if number is <5,, then can
+		const resp2 = await fetch(PUBLIC_BACKEND_BASE_URL + `/prompts-remaining/${userId}`, {
+			method: 'GET'
+		});
 
-		try {
-			const resp = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + '/get-art', {
-				method: 'POST',
-				mode: 'cors',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: getAccessTokenFromLocalStorage()
-				},
-				body: JSON.stringify({ prompt: inputDetails, size: selectedSize, userId: userId })
-			});
-			if (resp.status === 200) {
-				loading.set(false);
-				const res = await resp.json();
-				console.log(res);
-				answer = res.text[0].url;
-				generateFormSubmitted.set(true);
-				// here we do api call to increment no of prompts of this user by 1
-				const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+		const res2 = await resp2.json();
+		const promptsRemaining = Number(res2.promptsRemaining);
+		// no of prompt remaining api ends here
+
+		inputDetails = e.target['input'].value;
+
+		if (promptsRemaining > 0) {
+			try {
+				const resp = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + '/get-art', {
 					method: 'POST',
 					mode: 'cors',
 					headers: {
-						'Content-Type': 'application/json'
-						// Authorization: getAccessTokenFromLocalStorage()
-					}
+						'Content-Type': 'application/json',
+						Authorization: getAccessTokenFromLocalStorage()
+					},
+					body: JSON.stringify({ prompt: inputDetails, size: selectedSize, userId: userId })
 				});
-			} else {
-				loading.set('false');
-				// Handle other status codes here
-				console.error('Error:', resp.status);
+				if (resp.status === 200) {
+					loading.set(false);
+					const res = await resp.json();
+					console.log(res);
+					answer = res.text[0].url;
+					generateFormSubmitted.set(true);
+					// here we do api call to increment no of prompts of this user by 1
+					const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+						method: 'POST',
+						mode: 'cors',
+						headers: {
+							'Content-Type': 'application/json'
+							// Authorization: getAccessTokenFromLocalStorage()
+						}
+					});
+				} else {
+					loading.set('false');
+					// Handle other status codes here
+					console.error('Error:', resp.status);
+				}
+			} catch (error) {
+				loading.set(false);
+				// Handle network errors or exceptions
+				console.error('Error:', error);
+			} finally {
+				loading.set(false);
+				console.log('aiyo');
 			}
-		} catch (error) {
-			loading.set(false);
-			// Handle network errors or exceptions
-			console.error('Error:', error);
-		} finally {
-			loading.set(false);
-			console.log('aiyo');
+		} else {
+			goto('/payment');
+			// do alert here
 		}
 	}
 

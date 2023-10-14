@@ -33,36 +33,50 @@
 
 	async function clickGenerateVariation() {
 		loading.set(true);
-		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/generate-variation/${userId}`, {
-			method: 'POST',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: getAccessTokenFromLocalStorage()
-			}
+		// here we're doing api call to get no of prompts remaining, to see if user can do api call or not. if number is <5,, then can
+		const resp2 = await fetch(PUBLIC_BACKEND_BASE_URL + `/prompts-remaining/${userId}`, {
+			method: 'GET'
 		});
-		const res = await resp.json();
-		console.log(res);
 
-		if (resp.status == 200) {
-			loading.set(false);
-			variationFormSubmitted.set(true);
-			answer1 = res.text[0].url;
-			answer2 = res.text[0].url;
-			// here we do api call to increment no of prompts of this user by 1
-			const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+		const res2 = await resp2.json();
+		const promptsRemaining = Number(res2.promptsRemaining);
+		// no of prompt remaining api ends here
+
+		if (promptsRemaining > 0) {
+			const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/generate-variation/${userId}`, {
 				method: 'POST',
 				mode: 'cors',
 				headers: {
-					'Content-Type': 'application/json'
-					// Authorization: getAccessTokenFromLocalStorage()
+					'Content-Type': 'application/json',
+					Authorization: getAccessTokenFromLocalStorage()
 				}
 			});
-		} else {
-			loading.set(false);
-			if (res.error) {
-				console.log('aiyo');
+			const res = await resp.json();
+			console.log(res);
+
+			if (resp.status == 200) {
+				loading.set(false);
+				variationFormSubmitted.set(true);
+				answer1 = res.text[0].url;
+				answer2 = res.text[0].url;
+				// here we do api call to increment no of prompts of this user by 1
+				const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+					method: 'POST',
+					mode: 'cors',
+					headers: {
+						'Content-Type': 'application/json'
+						// Authorization: getAccessTokenFromLocalStorage()
+					}
+				});
+			} else {
+				loading.set(false);
+				if (res.error) {
+					console.log('aiyo');
+				}
 			}
+		} else {
+			goto('/payment');
+			// do alert here
 		}
 	}
 </script>

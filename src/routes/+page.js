@@ -17,13 +17,3 @@
 // 4. in the grid lines, make sure to say youre images wll appear here (like gencraft)
 
 // NEXT UP
-// PAYMENT
-// once prompts are expired, you cannot make anymore api requests.
-// if you try to do it, it will redirect you to payment page w an alert
-// for you to pay RM100 for a 100 prompts. once that 100 prompts, finishes, you then need to pay again
-
-// STEPS
-// for gen/var and edit, in the same function, we should do an api call to get noofprompts.
-// if noofprompts >= 1, then we can do api call, else goto (payment page)
-
-// lets try it for generate

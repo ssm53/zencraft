@@ -84,10 +84,11 @@ export async function load() {
 // DOWNLOADS (basic done)
 // need to do for edit images mylibarry part
 
-// CALCULATE PROMPTS (basic done)
+// CALCULATE PROMPTS HEADER (basic done)
 // issue is it autmatically updates only when you load it... not instantly, without loading
+// with our new way of doing prompts remaining, it doesnt update properly when someone made a payment and prompts remaining has changed
 
-// PAYMENT
+// PAYMENT (done)
 // once prompts are expired, you cannot make anymore api requests.
 // if you try to do it, it will redirect you to payment page.
 // for you to pay RM100 for a 100 prompts. once that 100 prompts, finishes, you then need to pay again

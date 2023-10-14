@@ -61,6 +61,10 @@
 		goto('/sign-up');
 	}
 
+	function clickPayment() {
+		goto('/payment');
+	}
+
 	// TESTING
 	// // Call updatePromptsRemaining when _totalPrompts is updated
 	// $: updatePromptsRemaining();
@@ -107,6 +111,12 @@
 					</button>
 
 					<span>{numberOfPromptsRemaining} prompts remaining</span>
+					<button
+						class="text-white hover:text-indigo-600 focus:outline-none"
+						on:click={clickPayment}
+					>
+						Payment
+					</button>
 					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={logOut}>
 						Log Out
 					</button>

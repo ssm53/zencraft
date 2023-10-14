@@ -44,41 +44,87 @@
 	// making call to our backend openai api to generate edits
 	export async function clickGenerateEdit(evt) {
 		evt.preventDefault();
-
-		const inputDetails = evt.target['input'].value;
 		loading.set(true);
 
-		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/generate-edit', {
-			method: 'POST',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: getAccessTokenFromLocalStorage()
-			},
-			body: JSON.stringify({ prompt: inputDetails, userId: userId })
+		// here we're doing api call to get no of prompts remaining, to see if user can do api call or not. if number is <5,, then can
+		const resp2 = await fetch(PUBLIC_BACKEND_BASE_URL + `/prompts-remaining/${userId}`, {
+			method: 'GET'
 		});
-		const res = await resp.json();
-		console.log(res);
 
-		if (resp.status == 200) {
-			editFormSubmitted.set(true);
-			loading.set(false);
-			answer = res.text[0].url;
-			// here we do api call to increment no of prompts of this user by 1
-			const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+		const res2 = await resp2.json();
+		const promptsRemaining = Number(res2.promptsRemaining);
+		// no of prompt remaining api ends here
+
+		const inputDetails = evt.target['input'].value;
+
+		if (promptsRemaining > 0) {
+			const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/generate-edit', {
 				method: 'POST',
 				mode: 'cors',
 				headers: {
-					'Content-Type': 'application/json'
-					// Authorization: getAccessTokenFromLocalStorage()
-				}
+					'Content-Type': 'application/json',
+					Authorization: getAccessTokenFromLocalStorage()
+				},
+				body: JSON.stringify({ prompt: inputDetails, userId: userId })
 			});
-		} else {
-			loading.set(false);
-			if (res.error) {
-				console.log('aiyo');
+			const res = await resp.json();
+			console.log(res);
+
+			if (resp.status == 200) {
+				editFormSubmitted.set(true);
+				loading.set(false);
+				answer = res.text[0].url;
+				// here we do api call to increment no of prompts of this user by 1
+				const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+					method: 'POST',
+					mode: 'cors',
+					headers: {
+						'Content-Type': 'application/json'
+						// Authorization: getAccessTokenFromLocalStorage()
+					}
+				});
+			} else {
+				loading.set(false);
+				if (res.error) {
+					console.log('aiyo');
+				}
 			}
+		} else {
+			goto('/payment');
+			// do alert here
 		}
+
+		// const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/generate-edit', {
+		// 	method: 'POST',
+		// 	mode: 'cors',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 		Authorization: getAccessTokenFromLocalStorage()
+		// 	},
+		// 	body: JSON.stringify({ prompt: inputDetails, userId: userId })
+		// });
+		// const res = await resp.json();
+		// console.log(res);
+
+		// if (resp.status == 200) {
+		// 	editFormSubmitted.set(true);
+		// 	loading.set(false);
+		// 	answer = res.text[0].url;
+		// 	// here we do api call to increment no of prompts of this user by 1
+		// 	const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
+		// 		method: 'POST',
+		// 		mode: 'cors',
+		// 		headers: {
+		// 			'Content-Type': 'application/json'
+		// 			// Authorization: getAccessTokenFromLocalStorage()
+		// 		}
+		// 	});
+		// } else {
+		// 	loading.set(false);
+		// 	if (res.error) {
+		// 		console.log('aiyo');
+		// 	}
+		// }
 	}
 </script>
 
