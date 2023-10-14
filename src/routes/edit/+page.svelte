@@ -6,40 +6,121 @@
 	import { editFormSubmitted } from '../../stores/store';
 	import { getAccessTokenFromLocalStorage } from '../../utils/auth';
 	import { getUserId } from '../../utils/auth';
+	import { wrongSizeAlert } from '../../utils/alert';
 
 	let answer = '';
 	const userId = getUserId();
 	// upload ori image
 	export async function uploadOriImage(evt) {
-		const formData = new FormData();
-		formData.append('file', evt.target.files[0]);
-		console.log(evt.target.files[0]);
-		evt.target.value = null;
+		// new way to check for image size
+		// new way to check for image size
+		console.log('hello1');
+		const file = evt.target.files[0];
+		if (file) {
+			console.log('hello2');
+			// Check the size of the uploaded image
+			const image = new Image();
+			image.src = URL.createObjectURL(file);
 
-		try {
-			const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-original', {
-				method: 'POST',
-				body: formData
-			});
-		} catch (error) {
-			console.error(error);
+			image.onload = async function () {
+				const width = this.width;
+				const height = this.height;
+
+				if (width === 512 && height === 512) {
+					console.log('hello3');
+					// Image size is 512x512, proceed with the API request
+					const formData = new FormData();
+					formData.append('file', file);
+					evt.target.value = null;
+
+					try {
+						const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-original', {
+							method: 'POST',
+							body: formData
+						});
+
+						// Continue with the rest of your code after successful image upload
+						// ...
+					} catch (error) {
+						console.error(error);
+					}
+				} else {
+					console.log('hello4');
+					wrongSizeAlert();
+					evt.target.value = null; // Clear the input
+				}
+			};
 		}
+		// const formData = new FormData();
+		// formData.append('file', evt.target.files[0]);
+		// console.log(evt.target.files[0]);
+		// evt.target.value = null;
+
+		// try {
+		// 	const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-original', {
+		// 		method: 'POST',
+		// 		body: formData
+		// 	});
+		// } catch (error) {
+		// 	console.error(error);
+		// }
 	}
+
 	// upload mask image
 	export async function uploadMaskImage(evt) {
-		const formData = new FormData();
-		formData.append('file', evt.target.files[0]);
-		console.log(evt.target.files[0]);
-		evt.target.value = null;
+		// new way to check for image size
+		console.log('hello1');
+		const file = evt.target.files[0];
+		if (file) {
+			console.log('hello2');
+			// Check the size of the uploaded image
+			const image = new Image();
+			image.src = URL.createObjectURL(file);
 
-		try {
-			const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-mask', {
-				method: 'POST',
-				body: formData
-			});
-		} catch (error) {
-			console.error(error);
+			image.onload = async function () {
+				const width = this.width;
+				const height = this.height;
+
+				if (width === 512 && height === 512) {
+					console.log('hello3');
+					// Image size is 512x512, proceed with the API request
+					const formData = new FormData();
+					formData.append('file', file);
+					evt.target.value = null;
+
+					try {
+						const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-mask', {
+							method: 'POST',
+							body: formData
+						});
+
+						// Continue with the rest of your code after successful image upload
+						// ...
+					} catch (error) {
+						console.error(error);
+					}
+				} else {
+					console.log('hello4');
+					wrongSizeAlert();
+					evt.target.value = null; // Clear the input
+				}
+			};
 		}
+
+		// // old ori way of doing which works
+		// const formData = new FormData();
+		// formData.append('file', evt.target.files[0]);
+		// console.log(evt.target.files[0]);
+		// evt.target.value = null;
+
+		// try {
+		// 	const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-mask', {
+		// 		method: 'POST',
+		// 		body: formData
+		// 	});
+		// } catch (error) {
+		// 	console.error(error);
+		// }
 	}
 	// making call to our backend openai api to generate edits
 	export async function clickGenerateEdit(evt) {

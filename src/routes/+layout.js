@@ -3,7 +3,8 @@ export const ssr = false;
 import { isLoggedIn } from '../utils/auth';
 import { getUserId } from '../utils/auth';
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
-import { totalPrompts } from '../stores/store'; // NEW
+// import { totalPrompts } from '../stores/store'; // NEW
+import { promptsRem } from '../stores/store';
 
 let hasCheckedLoggedIn = false;
 // export let _totalPrompts; // TESTING
@@ -19,14 +20,18 @@ export async function load() {
 	// NEW
 	const userId = getUserId();
 
-	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/no-of-prompts/${userId}`, {
-		method: 'GET'
-	});
+	if (userId) {
+		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/prompts-remaining/${userId}`, {
+			method: 'GET'
+		});
 
-	const res = await resp.json();
-	// NEW
-	const newTotalPrompts = Number(res.promptNumber);
-	totalPrompts.set(newTotalPrompts); // Update the store with the new value
+		const res = await resp.json();
+		// NEW
+		const newPromptsRem = Number(res.promptsRemaining);
+		promptsRem.set(newPromptsRem); // Update the store with the new value
+	} else {
+		console.log('not signed up yet');
+	}
 
 	// old style which worked TESTING
 	// if (resp.status === 200) {
@@ -86,19 +91,20 @@ export async function load() {
 
 // CALCULATE PROMPTS HEADER (basic done)
 // issue is it autmatically updates only when you load it... not instantly, without loading
-// with our new way of doing prompts remaining, it doesnt update properly when someone made a payment and prompts remaining has changed
 
 // PAYMENT (done)
 // once prompts are expired, you cannot make anymore api requests.
 // if you try to do it, it will redirect you to payment page.
 // for you to pay RM100 for a 100 prompts. once that 100 prompts, finishes, you then need to pay again
 
-// STYLE HEADER
-
 // further things
-// need to allow doanloads everywhere
-// need to do number of prompts
-// make sure to do rediret and shit
-// alerts
-// need to ensure default option is 256x156 or size buttons and also its colour in image generation
 // error handling
+// alerts
+// sort out edit image
+// do forgot password/username
+// style header
+// better styling for buttons etc.
+// need to ensure default option is 256x156 or size buttons and also its colour in image generation
+// sendgrid email sending
+// in the grid lines, make sure to say youre images wll appear here (like gencraft)
+// redirect and auth

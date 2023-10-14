@@ -5,7 +5,8 @@
 	import { getUserId } from './auth';
 	// import { _totalPrompts } from '../routes/+layout.js'; // TESTING
 	import { onMount } from 'svelte';
-	import { totalPrompts } from '../stores/store'; // NEW and NEW 2
+	// import { totalPrompts } from '../stores/store'; // NEW and NEW 2
+	import { promptsRem } from '../stores/store';
 
 	// let numberOfPromptsRemaining = 5; // TESTING
 
@@ -20,11 +21,11 @@
 	// NEW
 	let numberOfPromptsRemaining;
 	$: {
-		numberOfPromptsRemaining = 5 - $totalPrompts;
+		numberOfPromptsRemaining = $promptsRem;
 	}
 
-	totalPrompts.subscribe((value) => {
-		$totalPrompts = value;
+	promptsRem.subscribe((value) => {
+		$promptsRem = value;
 	});
 	// NEW ENDS
 

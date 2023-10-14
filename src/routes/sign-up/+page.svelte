@@ -1,14 +1,14 @@
 <script>
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
-	// import { signUpAlert, signUpEmailTaken } from '../../../utils/alert';
+	import { signUpAlert, signUpEmailTaken } from '../../utils/alert.js';
 	import Spinner from '../../spinner/spinner.svelte';
 	import { loading } from '../../stores/store';
 
 	let formErrors = {};
 
 	export function postSignUp() {
-		// signUpAlert();
+		signUpAlert();
 		goto('/sign-in');
 	}
 
@@ -55,7 +55,7 @@
 			loading.update((value) => {
 				return false;
 			});
-			// signUpEmailTaken();
+			signUpEmailTaken();
 		} else {
 			// spinner shits
 			loading.update((value) => {

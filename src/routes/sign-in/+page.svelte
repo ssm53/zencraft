@@ -1,15 +1,14 @@
 <script>
 	import { authenticateUser, getAccessTokenFromLocalStorage } from '../../utils/auth';
 	import { goto } from '$app/navigation';
-	// import { showLoginAlert, loginSucAlert } from '../../utils/alert';
+	import { showLoginAlert, loginSucAlert } from '../../utils/alert.js';
 	import Spinner from '../../spinner/spinner.svelte';
 	import { loading } from '../../stores/store';
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 
-	let formErrors = {};
-
 	let email = '';
 	let password = '';
+	let formErrors = {};
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -30,17 +29,18 @@
 			});
 			// Successful login, navigate to the home page
 			goto('/');
-			// loginSucAlert();
+			loginSucAlert();
 		} else {
 			loading.update((value) => {
 				return false;
 			});
-			// showLoginAlert();
+			showLoginAlert();
 
 			if (res.res.error) {
 				formErrors = res.res.error; // Update formErrors with validation errors
 			}
 			console.log(formErrors);
+			console.log(typeof formErrors);
 		}
 	}
 </script>

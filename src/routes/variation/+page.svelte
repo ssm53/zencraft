@@ -6,6 +6,7 @@
 	import { variationFormSubmitted } from '../../stores/store';
 	import { getAccessTokenFromLocalStorage } from '../../utils/auth';
 	import { getUserId } from '../../utils/auth';
+	import { wrongSizeAlert } from '../../utils/alert';
 
 	let formErrors = {};
 	let answer1 = '';
@@ -15,20 +16,59 @@
 
 	async function uploadImage(evt) {
 		// first thing here.. we're doing frontend upload image!
+		// new way to check for image size
+		console.log('hello1');
+		const file = evt.target.files[0];
+		if (file) {
+			console.log('hello2');
+			// Check the size of the uploaded image
+			const image = new Image();
+			image.src = URL.createObjectURL(file);
 
-		const formData = new FormData();
-		formData.append('file', evt.target.files[0]);
-		console.log(evt.target.files[0]);
-		evt.target.value = null;
+			image.onload = async function () {
+				const width = this.width;
+				const height = this.height;
 
-		try {
-			const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload', {
-				method: 'POST',
-				body: formData
-			});
-		} catch (error) {
-			console.error(error);
+				if (width === 512 && height === 512) {
+					console.log('hello3');
+					// Image size is 512x512, proceed with the API request
+					const formData = new FormData();
+					formData.append('file', file);
+					evt.target.value = null;
+
+					try {
+						const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload', {
+							method: 'POST',
+							body: formData
+						});
+
+						// Continue with the rest of your code after successful image upload
+						// ...
+					} catch (error) {
+						console.error(error);
+					}
+				} else {
+					console.log('hello4');
+					wrongSizeAlert();
+					evt.target.value = null; // Clear the input
+				}
+			};
 		}
+		// ends here
+		// BREAK
+		// // this is the ori style which works
+		// const formData = new FormData();
+		// formData.append('file', evt.target.files[0]);
+		// console.log(evt.target.files[0]);
+		// evt.target.value = null;
+		// try {
+		// 	const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload', {
+		// 		method: 'POST',
+		// 		body: formData
+		// 	});
+		// } catch (error) {
+		// 	console.error(error);
+		// }
 	}
 
 	async function clickGenerateVariation() {

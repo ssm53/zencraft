@@ -9,11 +9,9 @@
 // 1. https://medium.com/@david.richards.tech/how-to-create-openai-dall-e-mask-images-ed8feb562eba
 // 2. https://ai-image-editor.netlify.app/
 
-// GATHER EVERYTHING TOGETHER
-// THINGS TO DO
-// 1. sendgrid email sending for users who are signed up
-// 2. better styling for navbar, hover buttons etc
-// 3. should do default size (if user doesnt choose size, it will be 512 x 512)
-// 4. in the grid lines, make sure to say youre images wll appear here (like gencraft)
-
 // NEXT UP
+// error handling and alerts
+// first, lets set up alerts (done)
+// do for signup page (follow next-ecomm) (done)
+// do for login (basic done) - but here got issue with formError is an object or a string
+// check for image sizes! - do error handling for this
