@@ -31,6 +31,30 @@ export function wrongSizeAlert() {
 	resetTimeout();
 }
 
+// no user for reset password
+export function noUserAlert() {
+	warningAlert.set(true);
+	alertMessage.set('No user found with this email address');
+	resetTimeout();
+}
+
+export function recoveryEmailBeenSentAlert() {
+	successAlert.set(true);
+	alertMessage.set('A recovery link has been sent to your email');
+	resetTimeout();
+}
+
+export function errorResettingPassword() {
+	warningAlert.set(true);
+	alertMessage.set('Error resetting password. Try another email or try again later');
+	resetTimeout();
+}
+
+export function recoveryPassSuc() {
+	successAlert.set(true);
+	alertMessage.set('Successfully reset your password');
+	resetTimeout();
+}
 
 export function signUpAlert() {
 	// used

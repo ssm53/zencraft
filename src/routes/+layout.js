@@ -97,14 +97,16 @@ export async function load() {
 // if you try to do it, it will redirect you to payment page.
 // for you to pay RM100 for a 100 prompts. once that 100 prompts, finishes, you then need to pay again
 
+// ERROR HANDLING (login, signup, and check sizes) (basic done)
+// small issue with login error handling.. dk if formErrors is an object or a string, but still sorta works
+
 // further things
-// error handling
-// alerts
-// sort out edit image
 // do forgot password/username
 // style header
 // better styling for buttons etc.
 // need to ensure default option is 256x156 or size buttons and also its colour in image generation
 // sendgrid email sending
 // in the grid lines, make sure to say youre images wll appear here (like gencraft)
+// properly try out edit images with 512 x 512 and proper mask image
+// other alerts
 // redirect and auth

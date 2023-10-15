@@ -10,8 +10,12 @@
 // 2. https://ai-image-editor.netlify.app/
 
 // NEXT UP
-// error handling and alerts
-// first, lets set up alerts (done)
-// do for signup page (follow next-ecomm) (done)
-// do for login (basic done) - but here got issue with formError is an object or a string
-// check for image sizes! - do error handling for this
+// FORGOT PASSWORD
+// 1. when user clicks forgot password, it takes them to forgot-password page (done)
+// 2. style forgot-password page (done)
+// 3. set up basic api request, and set up endpoint in backend (done)
+// 4. have to send email, and must have the link in it! (done)
+// 5. have to handle when user clicks on that link la!
+
+// now, ive to change the format of the string - token before the userId
+// then once someone clicks that link, they go to that page... in page.js, we do get request to get the userId... now in page.svelte, we use that userId... here, we ask them to fill up a form, and then do a post request using userId to change the password of that user specifically.
