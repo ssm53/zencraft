@@ -56,6 +56,14 @@ export function recoveryPassSuc() {
 	resetTimeout();
 }
 
+export function makePayment() {
+	warningAlert.set(true);
+	alertMessage.set(
+		'Your free prompts have all been used. Please make payment to user additional prompts'
+	);
+	resetTimeout();
+}
+
 export function signUpAlert() {
 	// used
 	successAlert.set(true);

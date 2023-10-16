@@ -133,7 +133,7 @@
 	<div>
 		<button
 			on:click={clickGenerateVariation}
-			class=" bg-pink-700 rounded-md text-white px-3 py-3 mt-3"
+			class=" bg-pink-700 rounded-md border-2 border-pink-700 text-white px-3 py-3 mt-3 hover hover:border-2 hover:border-pink-700 hover:bg-gray-200 hover:text-pink-700"
 		>
 			Generate variations
 		</button>
@@ -161,8 +161,20 @@
 				</a>
 			</div>
 		{:else}
-			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+			<div class="relative">
+				<!-- svelte-ignore a11y-img-redundant-alt -->
+				<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+				<div
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"
+				>
+					<img
+						src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+						alt="Logo"
+						class="w-20 h-20 mb-2 ml-28"
+					/>
+					<p class="text-pink-700 font-bold text-2xl">Your images will appear here</p>
+				</div>
+			</div>
 		{/if}
 	</div>
 	<div class="r-container w-1/2 flex flex-col justify-center items-center">
@@ -180,8 +192,20 @@
 				</a>
 			</div>
 		{:else}
-			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+			<div class="relative">
+				<!-- svelte-ignore a11y-img-redundant-alt -->
+				<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+				<div
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"
+				>
+					<img
+						src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+						alt="Logo"
+						class="w-20 h-20 mb-2 ml-28"
+					/>
+					<p class="text-pink-700 font-bold text-2xl">Your images will appear here</p>
+				</div>
+			</div>
 		{/if}
 	</div>
 </div>

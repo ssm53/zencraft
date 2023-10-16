@@ -100,13 +100,18 @@ export async function load() {
 // ERROR HANDLING (login, signup, and check sizes) (basic done)
 // small issue with login error handling.. dk if formErrors is an object or a string, but still sorta works
 
+// FORGOT PASSWORD (basic done)
+// all ok, except token verification, because i dont know how to get slug into variables
+
+// ENSURE 512x512 DEFAULT FOR GENERATE (basic done)
+// all ok, except colour of button didnt change
+
+// CHECK WHY DOESNT MY EDIT COME UP (done)
+
+// PROMPTS INCREASE EVEN IF PAYMENT NOT GO THROUGH (NOT DONE)
+
+// IMAGES APPEAR HERE Z INDEX (done)
+
 // further things
-// do forgot password/username
-// style header
-// better styling for buttons etc.
-// need to ensure default option is 256x156 or size buttons and also its colour in image generation
-// sendgrid email sending
 // in the grid lines, make sure to say youre images wll appear here (like gencraft)
-// properly try out edit images with 512 x 512 and proper mask image
 // other alerts
-// redirect and auth

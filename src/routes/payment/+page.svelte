@@ -15,8 +15,7 @@
 			body: JSON.stringify({ id })
 		});
 		const res = await resp.json();
-		// goto(res);
-		if (res.status === 'success') {
+		if (res.status == 'success') {
 			// Payment was successful, redirect to the session URL
 			goto(res.url);
 			// here we do api call to increment no of prompts remaining for this user by 50

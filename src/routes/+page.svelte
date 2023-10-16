@@ -6,9 +6,10 @@
 	import { generateFormSubmitted } from '../stores/store';
 	import { getUserId } from '../utils/auth';
 	import { getAccessTokenFromLocalStorage } from '../utils/auth';
+	import { makePayment } from '../utils/alert';
 
 	let answer = '';
-	let selectedSize = '';
+	let selectedSize = '512x512';
 	let inputDetails = '';
 	const userId = getUserId();
 	// // testing
@@ -104,6 +105,7 @@
 				console.log('aiyo');
 			}
 		} else {
+			makePayment();
 			goto('/payment');
 			// do alert here
 		}
@@ -144,7 +146,9 @@
 		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6">
 			<div>
 				<span class="mr-12 ml-5 mt-4">Describe your creation in detail</span>
-				<button on:click={populateRandomPrompt} class="ml-8 bg-gray-100 mt-4 px-2 py-2 text-sm"
+				<button
+					on:click={populateRandomPrompt}
+					class="ml-8 bg-gray-100 mt-4 px-2 py-2 text-sm rounded-md hover hover:bg-black hover:text-gray-100 hover:rounded-md"
 					>Surprise me</button
 				>
 			</div>
@@ -177,11 +181,13 @@
 			<div class="size-choice flex flex-col items-center mt-5">
 				<button
 					on:click={() => updateSelectedSize('256x256')}
-					class="size-button bg-pink-700 w-1/2 px-3 py-3 rounded-md text-white mb-5">256x256</button
+					class="size-button bg-pink-700 w-1/2 px-3 py-3 rounded-md text-white mb-5 border-2 border-pink-700 hover hover:rounded-md hover:text-pink-700 hover:bg-gray-200 hover:border-2 hover:border-pink-700"
+					>256x256</button
 				>
 				<button
 					on:click={() => updateSelectedSize('512x512')}
-					class="size-button bg-pink-700 w-1/2 px-3 py-3 rounded-md text-white mb-5">512x512</button
+					class="size-button bg-pink-700 w-1/2 px-3 py-3 rounded-md text-white mb-5 border-2 border-pink-700 hover:text-pink-700 hover:bg-gray-200 hover:border-2 hover:border-pink-700"
+					>512x512</button
 				>
 			</div>
 		</div>
@@ -201,8 +207,20 @@
 				</a>
 			</div>
 		{:else}
-			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+			<div class="relative">
+				<!-- svelte-ignore a11y-img-redundant-alt -->
+				<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+				<div
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"
+				>
+					<img
+						src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+						alt="Logo"
+						class="w-20 h-20 mb-2 ml-28"
+					/>
+					<p class="text-pink-700 font-bold text-2xl">Your images will appear here</p>
+				</div>
+			</div>
 		{/if}
 	</div>
 </div>

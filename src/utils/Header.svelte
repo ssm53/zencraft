@@ -78,7 +78,7 @@
 	<div class="bg-black text-white">
 		<div class="container mx-auto flex justify-between items-center p-4">
 			<button
-				class="bg-black text-white p-3 rounded-full hover:bg-gray-900 focus:outline-none"
+				class="bg-black text-white p-3 rounded-full hover:bg-gray-900 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
 				on:click={clickHome}
 			>
 				<img
@@ -90,43 +90,54 @@
 			<div class="flex space-x-4">
 				{#if logIO === true}
 					<button
-						class="text-white hover:text-indigo-600 focus:outline-none"
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
 						on:click={clickGenerate}
 					>
 						Generate
 					</button>
-					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={clickEdit}>
+					<button
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
+						on:click={clickEdit}
+					>
 						Edit
 					</button>
 					<button
-						class="text-white hover:text-indigo-600 focus:outline-none"
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
 						on:click={clickVariation}
 					>
 						Variation
 					</button>
 					<button
-						class="text-white hover:text-indigo-600 focus:outline-none"
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
 						on:click={clickMyLibrary}
 					>
 						My Library
 					</button>
 
-					<span>{numberOfPromptsRemaining} prompts remaining</span>
+					<span class="hover:shadow-indigo-600 hover:shadow-sm hover:text-indigo-600"
+						>{numberOfPromptsRemaining} prompts remaining</span
+					>
 					<button
-						class="text-white hover:text-indigo-600 focus:outline-none"
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
 						on:click={clickPayment}
 					>
 						Payment
 					</button>
-					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={logOut}>
+					<button
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
+						on:click={logOut}
+					>
 						Log Out
 					</button>
 				{:else}
-					<button class="text-white hover:text-indigo-600 focus:outline-none" on:click={clickLogin}>
+					<button
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
+						on:click={clickLogin}
+					>
 						Log In
 					</button>
 					<button
-						class="text-white hover:text-indigo-600 focus:outline-none"
+						class="text-white hover:text-indigo-600 focus:outline-none hover:shadow-indigo-600 hover:shadow-sm"
 						on:click={clickSignUp}
 					>
 						Sign Up

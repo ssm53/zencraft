@@ -51,19 +51,6 @@
 				}
 			};
 		}
-		// const formData = new FormData();
-		// formData.append('file', evt.target.files[0]);
-		// console.log(evt.target.files[0]);
-		// evt.target.value = null;
-
-		// try {
-		// 	const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-original', {
-		// 		method: 'POST',
-		// 		body: formData
-		// 	});
-		// } catch (error) {
-		// 	console.error(error);
-		// }
 	}
 
 	// upload mask image
@@ -106,21 +93,6 @@
 				}
 			};
 		}
-
-		// // old ori way of doing which works
-		// const formData = new FormData();
-		// formData.append('file', evt.target.files[0]);
-		// console.log(evt.target.files[0]);
-		// evt.target.value = null;
-
-		// try {
-		// 	const uploadImage = await fetch(PUBLIC_BACKEND_BASE_URL + '/upload-mask', {
-		// 		method: 'POST',
-		// 		body: formData
-		// 	});
-		// } catch (error) {
-		// 	console.error(error);
-		// }
 	}
 	// making call to our backend openai api to generate edits
 	export async function clickGenerateEdit(evt) {
@@ -174,38 +146,6 @@
 			goto('/payment');
 			// do alert here
 		}
-
-		// const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/generate-edit', {
-		// 	method: 'POST',
-		// 	mode: 'cors',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		Authorization: getAccessTokenFromLocalStorage()
-		// 	},
-		// 	body: JSON.stringify({ prompt: inputDetails, userId: userId })
-		// });
-		// const res = await resp.json();
-		// console.log(res);
-
-		// if (resp.status == 200) {
-		// 	editFormSubmitted.set(true);
-		// 	loading.set(false);
-		// 	answer = res.text[0].url;
-		// 	// here we do api call to increment no of prompts of this user by 1
-		// 	const resp2 = await fetch(`${PUBLIC_BACKEND_BASE_URL}` + `/inc-no-of-prompts/${userId}`, {
-		// 		method: 'POST',
-		// 		mode: 'cors',
-		// 		headers: {
-		// 			'Content-Type': 'application/json'
-		// 			// Authorization: getAccessTokenFromLocalStorage()
-		// 		}
-		// 	});
-		// } else {
-		// 	loading.set(false);
-		// 	if (res.error) {
-		// 		console.log('aiyo');
-		// 	}
-		// }
 	}
 </script>
 
@@ -213,15 +153,18 @@
 
 <div class="container min-w-full max-w-screen-xl w-full flex flex-row">
 	<div class="l-container w-2/5 bg-gray-100 h-screen flex flex-col items-center">
-		<div class="size-box flex flex-col w-5/6 bg-white mt-10">
+		<div class="size-box flex flex-col w-5/6 bg-white mt-10 py-5">
 			<div class=" ml-5">
 				<label class="text-pink-700 font-bold" for="file">Upload Original Image</label>
 				<input on:change={uploadOriImage} id="file" accept="image/*" type="file" />
 			</div>
-			<span class="font-bold text-black ml-5">We only accept 512x512 sized images!</span>
+			<p class=" font-bold text-sm text-black ml-5">We only accept 512x512 sized images!</p>
+		</div>
+		<div class="size-box flex flex-col w-5/6 bg-white mt-10 py-5">
 			<div class=" ml-5">
 				<label class="text-pink-700 font-bold" for="file">Upload Mask Image</label>
 				<input on:change={uploadMaskImage} id="file" accept="image/*" type="file" />
+				<p class="font-bold text-sm text-black">We only accept 512x512 sized images!</p>
 			</div>
 		</div>
 		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6">
@@ -266,8 +209,20 @@
 				</a>
 			</div>
 		{:else}
-			<!-- svelte-ignore a11y-img-redundant-alt -->
-			<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+			<div class="relative">
+				<!-- svelte-ignore a11y-img-redundant-alt -->
+				<img src="/src/images/grid-image.jpeg" alt="grid picture" />
+				<div
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"
+				>
+					<img
+						src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+						alt="Logo"
+						class="w-20 h-20 mb-2 ml-28"
+					/>
+					<p class="text-pink-700 font-bold text-2xl">Your images will appear here</p>
+				</div>
+			</div>
 		{/if}
 	</div>
 </div>

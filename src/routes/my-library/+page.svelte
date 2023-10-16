@@ -11,7 +11,7 @@
 
 	export let data;
 
-	let editimages = [];
+	let eImages = [];
 
 	function clickMyGenerations() {
 		editImages.set(false);
@@ -40,12 +40,13 @@
 
 		if (resp.status === 200) {
 			console.log(res);
+			eImages = res.myEditImages;
 			return {
-				editimages: res.myEditImages
+				eImages: res.myEditImages
 			};
 		} else {
 			return {
-				editimages: []
+				eImages: []
 			};
 		}
 	}
@@ -55,19 +56,27 @@
 
 <div class="bg-gray-100">
 	<div
-		class="top-container flex flex-col justify-center items-center border-b-2 border-black bg-white"
+		class="top-container flex flex-col justify-center items-center border-b-2 border-black bg-white h-44"
 	>
 		<div>
-			<span class="font-bold text-lg text-pink-700">My Library</span>
+			<span class="font-bold text-3xl text-pink-700">My Library</span>
 		</div>
-		<div class="flex flex-row justify-between">
-			<button on:click={clickMyGenerations} class="border-r-2 border-black text-lg px-4"
+		<div class="flex flex-row justify-between mt-5">
+			<button
+				on:click={clickMyGenerations}
+				class="border-r-2 border-r-black border-b-2 border-b-white text-xl px-4 hover:border-b-2 hover:border-indigo-600"
 				>My Generations</button
 			>
-			<button on:click={clickMyVariations} class="border-r-2 border-black text-lg px-4"
+			<button
+				on:click={clickMyVariations}
+				class="border-r-2 border-r-black border-b-2 border-b-white text-xl px-4 hover:border-b-2 hover:border-indigo-600"
 				>My Variations</button
 			>
-			<button on:click={clickMyEdits} class="text-lg px-4">My Edits</button>
+			<button
+				on:click={clickMyEdits}
+				class="text-xl px-4 border-b-2 border-b-white hover:border-b-2 hover:border-indigo-600"
+				>My Edits</button
+			>
 		</div>
 	</div>
 
@@ -116,9 +125,9 @@
 					</div>
 				{/each}
 			</div>
-		{:else}
+		{:else if $editImages}
 			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-				{#each editimages as editI}
+				{#each eImages as editI}
 					<div class="bg-white shadow-lg p-4 rounded-lg">
 						<!-- svelte-ignore a11y-img-redundant-alt -->
 						<img src={editI.url} alt="my picture" class="w-full h-64 object-cover" />
@@ -136,6 +145,8 @@
 					</div>
 				{/each}
 			</div>
+		{:else}
+			<p>nothing</p>
 		{/if}
 	</div>
 </div>
