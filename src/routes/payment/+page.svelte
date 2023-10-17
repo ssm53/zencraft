@@ -33,8 +33,4 @@
 	}
 </script>
 
-<body>
-	<form action="/create-checkout-session" method="POST">
-		<button type="submit" on:click={checkout(userId)}>Pay now</button>
-	</form>
-</body>
+<button type="submit" on:click={checkout(userId)}>Pay now</button>
