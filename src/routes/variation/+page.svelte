@@ -161,20 +161,13 @@
 				</a>
 			</div>
 		{:else}
-			<div class="relative">
-				<!-- svelte-ignore a11y-img-redundant-alt -->
-				<img src="/src/images/grid-image.jpeg" alt="grid picture" />
-				<div
-					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"
-				>
-					<img
-						src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
-						alt="Logo"
-						class="w-20 h-20 mb-2 ml-28"
-					/>
-					<p class="text-pink-700 font-bold text-2xl">Your images will appear here</p>
-				</div>
-			</div>
+			<img
+				src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+				alt="Logo"
+				class="w-20 h-20 mb-2"
+			/>
+
+			<p class=" text-pink-700 font-bold text-2xl">Your images will appear here</p>
 		{/if}
 	</div>
 	<div class="r-container w-1/2 flex flex-col justify-center items-center">
@@ -192,20 +185,13 @@
 				</a>
 			</div>
 		{:else}
-			<div class="relative">
-				<!-- svelte-ignore a11y-img-redundant-alt -->
-				<img src="/src/images/grid-image.jpeg" alt="grid picture" />
-				<div
-					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"
-				>
-					<img
-						src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
-						alt="Logo"
-						class="w-20 h-20 mb-2 ml-28"
-					/>
-					<p class="text-pink-700 font-bold text-2xl">Your images will appear here</p>
-				</div>
-			</div>
+			<img
+				src="https://images.websiteplanet.com/wp-content/uploads/2020/08/9-Best-Z-Logos-and-How-to-Make-Your-Own-for-Free-image1.png"
+				alt="Logo"
+				class="w-20 h-20 mb-2"
+			/>
+
+			<p class=" text-pink-700 font-bold text-2xl">Your images will appear here</p>
 		{/if}
 	</div>
 </div>
