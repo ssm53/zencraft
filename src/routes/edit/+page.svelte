@@ -152,22 +152,22 @@
 <Spinner />
 
 <div class="container min-w-full max-w-screen-xl w-full flex flex-row">
-	<div class="l-container w-2/5 bg-gray-100 h-screen flex flex-col items-center">
-		<div class="size-box flex flex-col w-5/6 bg-white mt-10 py-5">
+	<div class="l-container w-2/5 bg-pink-700 h-screen flex flex-col items-center">
+		<div class="size-box flex flex-col w-5/6 bg-white mt-10 py-5 border rounded-lg">
 			<div class=" ml-5">
 				<label class="text-pink-700 font-bold" for="file">Upload Original Image</label>
 				<input on:change={uploadOriImage} id="file" accept="image/*" type="file" />
 			</div>
 			<p class=" font-bold text-sm text-black ml-5">We only accept 512x512 sized images!</p>
 		</div>
-		<div class="size-box flex flex-col w-5/6 bg-white mt-10 py-5">
+		<div class="size-box flex flex-col w-5/6 bg-white mt-10 py-5 border rounded-lg">
 			<div class=" ml-5">
 				<label class="text-pink-700 font-bold" for="file">Upload Mask Image</label>
 				<input on:change={uploadMaskImage} id="file" accept="image/*" type="file" />
 				<p class="font-bold text-sm text-black">We only accept 512x512 sized images!</p>
 			</div>
 		</div>
-		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6">
+		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6 border rounded-lg">
 			<div>
 				<span class="mr-12 ml-5 mt-4 font-bold text-pink-700">Describe your edit in detail</span>
 			</div>

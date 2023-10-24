@@ -142,8 +142,8 @@
 <Spinner />
 
 <div class="container min-w-full max-w-screen-xl w-full flex flex-row">
-	<div class="l-container w-2/5 bg-gray-100 h-screen flex flex-col items-center">
-		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6">
+	<div class="l-container w-2/5 bg-pink-700 h-screen flex flex-col items-center">
+		<div class="prompt-box flex flex-col w-5/6 bg-white mt-6 border rounded-lg">
 			<div>
 				<span class="mr-12 ml-5 mt-4">Describe your creation in detail</span>
 				<button
@@ -176,7 +176,7 @@
 			<!-- <button on:click={getNoOfPrompts}>click me</button> -->
 		</div>
 
-		<div class="size-box flex flex-col w-5/6 bg-white mt-10">
+		<div class="size-box flex flex-col w-5/6 bg-white mt-10 border rounded-lg">
 			<p class="font-bold ml-5">Pick your size</p>
 			<div class="size-choice flex flex-col items-center mt-5">
 				<button
